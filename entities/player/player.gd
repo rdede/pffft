@@ -6,7 +6,7 @@ export(int) var health := max_health
 export(int) var damage := 10
 export(float) var attack_cooldown_modifier := 0.0
 
-onready var weapon := $HandSpritePlaceholder
+onready var weapon := $Weapon
 onready var attack_animation := $HandSpritePlaceholder/AttackAnimation
 
 signal attack
@@ -29,7 +29,7 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		weapon.rotation = get_local_mouse_position().angle() + deg2rad(90)
+		weapon.rotation = get_local_mouse_position().angle()
 
 
 func _on_HitBox_body_entered(body: Node) -> void:

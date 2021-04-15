@@ -8,15 +8,29 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://weapons/weapon.gd"
+} ]
 _global_script_class_icons={
-
+"Weapon": ""
 }
 
 [application]
 
 config/name="Pffft - Project"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input]
 

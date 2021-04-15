@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pffft - Project"
+run/main_scene="res://scenes/arena/arena.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -63,6 +64,8 @@ Player_attack={
 [layer_names]
 
 2d_physics/layer_1="Player"
+2d_physics/layer_2="Player_Weapon"
+2d_physics/layer_6="Walls"
 
 [rendering]
 

@@ -6,10 +6,10 @@ func _ready() -> void:
 	pass
 
 func _init() -> void:
-	speed = 3500.0
+	projectile_speed = 3500.0
 
 func fire(power_percentage: float) -> void:
-	var projectil = projectil_path.instance()
-	owner.get_parent().add_child(projectil)
-	projectil.transform = muzzle.global_transform
-	projectil.setup(damage, speed, power_percentage)
+	var projectile = projectile_path.instance()
+	owner.get_parent().add_child(projectile)
+	projectile.transform = muzzle.global_transform
+	projectile.setup(damage, projectile_speed, power_percentage)

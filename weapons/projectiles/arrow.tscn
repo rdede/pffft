@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://weapons/projectiles/arrow.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.5495, 4 )
+
+[node name="Arrow" type="Area2D" groups=[
+"Projectile",
+]]
+collision_layer = 2
+collision_mask = 32
+script = ExtResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 0, -4 )
+polygon = PoolVector2Array( 0, -4, 5.17291, -0.015336, 19.0453, -0.0279179, 19.0618, -3.93118, 24.9367, 4.00828, 19.5072, 11.7709, 19.3029, 8.00207, 5.5371, 7.96375, 0, 12 )
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2( 12.5912, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+[connection signal="body_entered" from="." to="." method="_on_Projectil_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -6,7 +6,6 @@
 extents = Vector2( 4.13411, 16 )
 
 [node name="SimpleBow" type="StaticBody2D"]
-collision_layer = 2
 collision_mask = 0
 script = ExtResource( 1 )
 
@@ -16,7 +15,7 @@ offset = Vector2( 16, 12 )
 polygon = PoolVector2Array( -16, -24, -16, 0, -8, -8, -8, -16 )
 
 [node name="Muzzle" type="Position2D" parent="Body"]
-position = Vector2( 8, 0 )
+position = Vector2( -8, 0 )
 scale = Vector2( 1, 0.3 )
 __meta__ = {
 "_gizmo_extents_": 0.0

@@ -5,6 +5,7 @@ var speed : float
 var processed_speed := 1.0
 var acceleration_percentage : float
 var max_travel_time : float
+var hurt := true
 
 onready var timer := $Timer
 
@@ -37,8 +38,18 @@ func setup(damage: int, speed: float, power_percentage: float, max_travel_time :
 
 
 func _on_Timer_timeout() -> void:
-	hit_ground()
+	if is_physics_processing():
+		hit_ground()
 	
 func hit_ground() -> void: 
 	self.set_physics_process(false)
 	self.scale.x = 0.7
+	hurt = false
+
+
+func _on_Projectil_body_entered(body: Node) -> void:
+	if body.is_in_group("Collider"):
+		self.set_physics_process(false)
+		timer.stop()
+		processed_speed = 0.0
+		hurt = false

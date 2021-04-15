@@ -3,14 +3,14 @@ extends Node
 class_name Weapon
 
 var damage := 10
-var speed := 200.0
+var projectile_speed := 200.0
 var sprite_path : String
 var power_steps := 4
 
 var hold_time := 0.0
 var hold_time_per_power_steps := 0.1
 
-onready var projectil_path = load("res://weapons/projectil/projectil.tscn")
+onready var projectile_path = load("res://weapons/projectiles/arrow.tscn")
 
 func _ready() -> void:
 	# Assert take a condition and a string. If the condition is true, an error is thrown with the string

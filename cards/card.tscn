@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cards/card.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 96, 160 )
+
+[node name="Card" type="KinematicBody2D"]
+input_pickable = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 96, 160 )
+shape = SubResource( 1 )
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color( 0.737255, 0.54902, 0.188235, 1 )
+polygon = PoolVector2Array( 0, 0, 0, 320, 192, 320, 192, 0 )
+
+[node name="Foreground" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( 8, 64, 8, 176, 93.5119, 185.783, 184, 176, 184, 64, 93.5119, 56.1796 )
+
+[node name="Price" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 29.0
+margin_bottom = 26.0
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 112.0
+margin_bottom = 46.0
+text = "Title"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 189.0
+margin_right = 360.0
+margin_bottom = 451.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget erat sem. Vivamus blandit at lacus vitae efficitur. Donec elit urna, eleifend sit amet aliquet et, blandit vel risus. Aliquam finibus odio non sagittis porta. Phasellus est justo, convallis eu sem id, pellentesque imperdiet sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra ex metus, vitae tristique mi lobortis pharetra. Maecenas id leo neque. Ut ullamcorper vehicula orci vitae rhoncus. Mauris vel lacus ipsum. Sed ut odio vitae mauris pulvinar iaculis et eu ipsum."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="input_event" from="." to="." method="_on_Card_input_event"]

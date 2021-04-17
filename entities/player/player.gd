@@ -17,6 +17,10 @@ var dead := false
 func _physics_process(delta: float) -> void:
 	velocity = (self.move_and_slide(move().normalized() * speed))
 	
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("Player_attack"):
+		weapon.rotation = get_local_mouse_position().angle()
+	
 func move() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("Player_move_right") - Input.get_action_strength("Player_move_left"),

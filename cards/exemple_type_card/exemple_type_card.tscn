@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cards/exemple_type_card/exemple_type_card.gd" type="Script" id=1]
+[ext_resource path="res://cards/card.tscn" type="PackedScene" id=2]
+
+[node name="ExmpleTypeCard" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Card" parent="." instance=ExtResource( 2 )]

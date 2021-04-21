@@ -1,4 +1,4 @@
-extends Container
+extends Node2D
 
 class_name Card
 
@@ -22,8 +22,13 @@ var current_state = STATES.IN_HAND
 
 var mousepos_offset := Vector2.ZERO
 
+var prev_position := Vector2.ZERO
+
+onready var container := $Container
+
 signal droped
 signal used
+signal hovered
 
 func _ready() -> void:
 	check_init_error()
@@ -31,12 +36,13 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if is_hovered and Input.is_action_pressed("Player_attack"):
-		current_state = STATES.IN_MOUSE
+		
 		is_hovered = false
-		mousepos_offset = get_global_mouse_position() - rect_global_position
+		current_state = STATES.IN_MOUSE
+		mousepos_offset = get_global_mouse_position() - container.rect_global_position
 		
 	if current_state == STATES.IN_MOUSE and Input.is_action_just_released("Player_attack"):
-		rect_scale = Vector2.ONE * 1
+		container.rect_scale = Vector2.ONE * 1
 		current_state = STATES.REORGANIZE
 		emit_signal("droped", get_global_mouse_position(), self)
 
@@ -46,13 +52,16 @@ func _physics_process(delta: float) -> void:
 			pass
 		STATES.IN_MOUSE:
 			var mousepos := get_global_mouse_position()
-			self.rect_global_position = mousepos - mousepos_offset
+			container.rect_global_position = mousepos - mousepos_offset
+			# Possible function to transform the card relative to the mouse movement 
+#			centrifugal_transform(prev_position, mousepos)
+			prev_position = mousepos
 		STATES.REORGANIZE:
 			if t <= 1.0:
-				rect_position = rect_position.linear_interpolate(target_pos, t)
+				container.rect_position = container.rect_position.linear_interpolate(target_pos, t)
 				t += delta / DRAW_TIME
 			else:
-				rect_position = target_pos
+				container.rect_position = target_pos
 				t = 0.0
 				current_state = STATES.IN_HAND
 
@@ -78,13 +87,20 @@ func check_init_error() -> void:
 
 
 func _on_ClickZone_mouse_entered() -> void:
-	rect_scale = Vector2.ONE * HOVER_ZOOM_FACTOR
+	container.rect_scale = Vector2.ONE * HOVER_ZOOM_FACTOR
 	is_hovered = true
+	self.z_index = 1
+	
 
 func _on_ClickZone_mouse_exited() -> void:
-	rect_scale = Vector2.ONE * 1
+	container.rect_scale = Vector2.ONE * 1
+	self.z_index = 0
 	is_hovered = false
-	if rect_global_position != target_pos:
+	if container.rect_global_position != target_pos:
 		current_state = STATES.REORGANIZE
 	else:
 		current_state = STATES.IN_HAND
+
+func centrifugal_transform(prev_position: Vector2, curr_position: Vector2) -> void:
+	var shift := curr_position - prev_position
+	container.rect_scale.x = 1 - clamp(abs(shift.x) / 2, 0, 90) / 100

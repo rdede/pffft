@@ -1,19 +1,56 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://cards/card.gd" type="Script" id=1]
+[ext_resource path="res://bandage.png" type="Texture" id=2]
 
-[node name="Card" type="MarginContainer"]
-margin_right = 128.0
-margin_bottom = 192.0
-rect_pivot_offset = Vector2( 96, 180 )
-mouse_default_cursor_shape = 2
+[node name="Card" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="Container" type="MarginContainer" parent="."]
+margin_left = -62.0
+margin_top = -96.0
+margin_right = 66.0
+margin_bottom = 96.0
+rect_pivot_offset = Vector2( 62, 96 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ClickZone" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="Container"]
 margin_right = 128.0
 margin_bottom = 192.0
-[connection signal="mouse_entered" from="ClickZone" to="." method="_on_ClickZone_mouse_entered"]
-[connection signal="mouse_exited" from="ClickZone" to="." method="_on_ClickZone_mouse_exited"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+margin_right = 128.0
+margin_bottom = 192.0
+texture = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="Container"]
+margin_right = 128.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Container/Control"]
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 157.0
+margin_bottom = 205.0
+rect_scale = Vector2( 0.75, 0.75 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickZone" type="ColorRect" parent="Container"]
+margin_right = 128.0
+margin_bottom = 192.0
+color = Color( 1, 1, 1, 0 )
+[connection signal="mouse_entered" from="Container/ClickZone" to="." method="_on_ClickZone_mouse_entered"]
+[connection signal="mouse_exited" from="Container/ClickZone" to="." method="_on_ClickZone_mouse_exited"]
